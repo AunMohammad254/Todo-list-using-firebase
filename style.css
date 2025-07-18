@@ -23,7 +23,7 @@
 }
 
 body {
-    font-family: 'Rajdhani', 'Orbitron', monospace;
+    font-family: 'Rajdhani', 'Orbitron', sans-serif;
     background: var(--dark-bg);
     background-image: 
         radial-gradient(circle at 20% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
