@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>NeonTodo - Futuristic Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
+    <script src="./firebase.js"></script>
+    <script src="./script.js"></script>
+    <link rel="icon" type="image/svg+xml" href="assets/icon-moon.svg">
+</head>
+<body>
+    <div class="neon-grid"></div>
+    <!-- Main container for the Todo App -->
+    <div class="container">
+        <!-- Header with title and theme toggle -->
+        <div class="header">
+            <div class="title">
+                <span class="neon-text">NEON</span><span class="todo-text">TODO</span>
+            </div>
+            <div class="theme">
+                <div class="theme-toggle">
+                    <div class="toggle-icon">🌙</div>
+                </div>
+            </div>
+        </div>
+        <!-- New todo input form -->
+        <div class="new-todo">
+            <div class="check">
+                <div class="check-mark neon-check">
+                    <div class="pulse-ring"></div>
+                </div>
+            </div>
+            <div class="new-todo-input">
+                <form onsubmit="addItem(event)">
+                    <input id="todo-input" type="text" placeholder="Enter your mission..." />
+                    <button type="submit" class="add-btn">
+                        <span>+</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <!-- Todo items list and controls -->
+        <div class="todo-items-wrapper">
+            <div class="todo-items">
+                <!-- Dynamic todo items will be generated here -->
+            </div>
+            <div class="todo-items-info">
+                <div class="items-left">
+                    <span id="items-count">0</span> <span class="neon-accent">missions</span> remaining
+                </div>
+                <div class="items-statuses">
+                    <span class="status-btn active" data-filter="all">All</span>
+                    <span class="status-btn" data-filter="active">Active</span>
+                    <span class="status-btn" data-filter="completed">Completed</span>
+                </div>
+                <div class="items-clear">
+                    <span class="clear-btn">ClearCompleted</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    
+</body>
+</html>
