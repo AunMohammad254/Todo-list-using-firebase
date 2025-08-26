@@ -8,10 +8,6 @@
   <img src="assets/icon-moon.svg" alt="NeonTodo Logo" width="100" height="100">
 </p>
 
-A sleek, futuristic todo list application with a neon cyberpunk aesthetic. NeonTodo helps you manage your tasks with style, featuring real-time synchronization across devices using Firebase Firestore.
-
-![NeonTodo Screenshot](https://via.placeholder.com/800x450.png?text=NeonTodo+Screenshot)
-
 ## 🌟 Live Demo
 
 Check out the live demo of NeonTodo: [NeonTodo Live Demo](https://neon-todo-list.netlify.app/)
