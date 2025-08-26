@@ -8,6 +8,12 @@
   <img src="assets/icon-moon.svg" alt="NeonTodo Logo" width="100" height="100">
 </p>
 
+<h1 align="center">NeonTodo</h1>
+
+<p align="center">
+  <strong>A futuristic task manager with a cyberpunk twist</strong>
+</p>
+
 ## 🌟 Live Demo
 
 Check out the live demo of NeonTodo: [NeonTodo Live Demo](https://neon-todo-list.netlify.app/)
