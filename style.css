@@ -275,6 +275,49 @@ body {
     transform: scale(1.2);
 }
 
+.add-btn.error {
+    background: var(--neon-pink);
+    border-color: var(--neon-pink);
+    color: var(--dark-bg);
+    transform: scale(1.2);
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+    box-shadow: 0 0 20px var(--neon-pink);
+}
+
+.add-btn.processing {
+    opacity: 0.7;
+    cursor: not-allowed;
+    animation: pulse 1s infinite alternate;
+}
+
+.error-input {
+    border-bottom: 2px solid var(--neon-pink) !important;
+    box-shadow: 0 5px 10px rgba(255, 0, 255, 0.2);
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+.error-message {
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    color: var(--neon-pink);
+    font-size: 0.9rem;
+    text-shadow: 0 0 5px var(--neon-pink);
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
 /* Todo Items */
 .todo-items-wrapper {
     border-radius: 15px;

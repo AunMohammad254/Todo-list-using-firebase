@@ -112,20 +112,64 @@ function generateItems(items){
 function addItem(event){
     event.preventDefault();
     let text = document.getElementById("todo-input");
-    if(text.value.trim() === '') return;
+    let inputValue = text.value.trim();
+    const addBtn = document.querySelector('.add-btn');
     
-    let newItem = db.collection("todo-items").add({
-        text: text.value.trim(),
+    // Validate input
+    if(inputValue === '') {
+        // Show error feedback
+        addBtn.classList.add('error');
+        text.classList.add('error-input');
+        setTimeout(() => {
+            addBtn.classList.remove('error');
+            text.classList.remove('error-input');
+        }, 500);
+        return;
+    }
+    
+    // Disable button during submission to prevent double-clicks
+    addBtn.disabled = true;
+    addBtn.classList.add('processing');
+    
+    // Add item to Firestore
+    db.collection("todo-items").add({
+        text: inputValue,
         status: "active",
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
     })
-    text.value = "";
-    
-    // Add visual feedback
-    const addBtn = document.querySelector('.add-btn');
-    addBtn.classList.add('success');
-    setTimeout(() => addBtn.classList.remove('success'), 300);
+    .then(() => {
+        console.log("Item added successfully");
+        // Clear input field
+        text.value = "";
+        
+        // Add visual success feedback
+        addBtn.classList.remove('processing');
+        addBtn.classList.add('success');
+        setTimeout(() => {
+            addBtn.classList.remove('success');
+            addBtn.disabled = false;
+        }, 300);
+    })
+    .catch((error) => {
+        console.error("Error adding item: ", error);
+        
+        // Add visual error feedback
+        addBtn.classList.remove('processing');
+        addBtn.classList.add('error');
+        
+        // Show error message to user
+        const errorMsg = document.createElement('div');
+        errorMsg.classList.add('error-message');
+        errorMsg.textContent = 'Failed to add task. Please try again.';
+        text.parentNode.appendChild(errorMsg);
+        
+        setTimeout(() => {
+            addBtn.classList.remove('error');
+            addBtn.disabled = false;
+            errorMsg.remove();
+        }, 3000);
+    });
 }
 
 function markCompleted(id){
@@ -235,6 +279,21 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.theme-toggle').addEventListener('click', function() {
         document.body.classList.toggle('light-theme');
     });
+    
+    // Ensure form submission is properly handled
+    const todoForm = document.querySelector('.new-todo-input form');
+    if (todoForm) {
+        // Remove the inline onsubmit attribute to avoid double submission
+        todoForm.removeAttribute('onsubmit');
+        todoForm.addEventListener('submit', addItem);
+    }
 });
+
+// Initialize form submission handler immediately to avoid race conditions
+const todoForm = document.querySelector('.new-todo-input form');
+if (todoForm && !todoForm.hasAttribute('data-initialized')) {
+    todoForm.setAttribute('data-initialized', 'true');
+    todoForm.addEventListener('submit', addItem);
+}
 
 getItems();
